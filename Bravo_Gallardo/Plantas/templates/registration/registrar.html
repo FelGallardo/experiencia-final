@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <style>
+        label.error {
+            color:red;
+            font-size: 1em;
+            width:300px;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            $('#formularioregis').validate({
+                rules: {
+                    username: {
+                        required: true
+                    },
+                    password1: {
+                        required: true
+                    },
+                    password2: {
+                        required: true
+                    }
+                }, 
+                messages: {
+                    username: {
+                        required: 'Ingrese un nombre de usuario!'
+                    },
+                    password1: {
+                        required: 'Ingrese una contraseña!'
+                    },
+                    password2: {
+                        required: 'Ingrese la contraseña denuevo!'
+                    }
+                }
+            }) 
+        });
+    </script>
+    
+</head>
+
+<body>
+    <br><br><br>
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card" style="background-color: rgba(255, 255, 255, 0.666);">
+                    <div class="card-body">
+                        <h2>Registro De Usuario</h2>
+                        <hr><br>
+                        <form action="#" method="post" id="formularioregis">
+                            {% csrf_token %}
+                            
+                            {{ form | crispy }}
+                            
+                            <a href="{% url 'index' %}" class="cajaP">Ir al Inicio</a> |
+                            <a href="{% url 'login' %}"class="cajaP">Iniciar Sesion</a>
+                            <input type="submit" value="Registrarse" class="btn btn-success" style="float: right;">
+                            
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+
+   
+
+   
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    {% load static %}
+
+    <link rel="icon" href="{% static 'img/pngwing.com.png' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/MyStyles.css' %}">
+    <link rel="stylesheet"
+        href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+    <script src="{% static 'js/valida.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    
+
+</head>
+
+<body>
+    <br>
+    <div class="container col-12">
+        <div class="row justify-content-center">
+            <h2 class="">Listado de Productos</h2>
+            <br><br><br><br><br>
+        </div>
+    </div>
+    <div class="container-fluid " >
+        <div class="row">
+            
+            {% for pro in plantas %}
+            
+            <div class=" col-lg-4 col-md-6 col-sm-12">
+                <div class="card text-center box "
+                    style="border-radius: 40px; background-color:rgba(180, 148, 105, 0.938)">
+                    {% if pro.imagen %}
+                    <img src="{{ pro.imagen.url }}" class="card-img img-fluid box mx-auto"
+                        style=" width: 70%; border-radius: 40px;">
+                    {% else %}
+                    <img src="{% static 'img/construc.png' %}" class="card-img img-fluid "
+                        style=" border-radius: 40px;">
+                    {% endif %}
+                    <div class="card-body " style="text-align: center;">
+                        <h3 class="card-title cajaP  ">
+                            {{ pro.nombreproduc }}
+                        </h3>
+                        <p class="card-text cajaP ">
+                            {{ pro.descripcion }}
+                        </p>
+                        <h3 class="cajaP">
+                            ${{ pro.precio}}.-
+                        </h3>
+                        {% if user.is_authenticated and user.username == 'admin' %}
+                        <button class="btn btn-one"
+                            style="color: black; border-radius: 100px; text-align: center;">Agregar al Carrito</button>
+                        <a href="{% url 'eliminar' pro.idprod %}" class="btn btn-one"
+                            style="color: black; border-radius: 100px; text-align: center;">Eliminar</a>
+                        <a href="{% url  'modificar' pro.idprod %}" class="btn btn-one"
+                            style="color: black; border-radius: 100px; text-align: center;">Modificar</a>
+                        {% else %}
+                        <button class="btn btn-one" style="color: black; border-radius: 100px;">Agregar al
+                            Carrito</button>
+                        {% endif %}
+
+                    </div>
+                </div>
+                <br>
+            </div>
+            {% endfor %}
+
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</body>
+
+</html>
+{% endblock %}

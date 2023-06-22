@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+   
+    <link rel="icon" href="{% static 'img/pngwing.com.png' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/MyStyles.css' %}">
+    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+</head>
+<body>
+    
+        <!-- reloj-->
+        <div >
+            <section style="position: absolute; z-index: 1;" >
+                <div class="reloj " id="reloj" >
+                    <h6>Hora actual</h6>
+                  <span id="tiempo">00 : 00 : 00</span>
+                </div>
+                <div id="cajaboton" style="position: relative; transition: left 1s ease-in-out; left:10px; margin-top: 20px; " >
+                  <button id="botiempo" class="butt" style="color: black;">></button>
+                </div>
+                
+              
+                
+            </section>
+          </div>
+          <!-- termino reloj-->
+          <!-- scrip que realiza el reloj-->
+
+
+          <!-- Nav    -->
+    <nav class="navbar navbar-expand-md navbar-light bg-dark  mb-4" id="barraNav" style="z-index: 1;">
+    <img src="{% static 'img/pngwing.com.png' %}" alt="logoBookStop" width="40px" class="logox" id="logo">
+    <a href="{% url 'index' %}" class="xd" id="texto">
+      GreenSeed
+    </a>
+    <!-- botón hamburguesa -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      {% if user.is_authenticated and user.username == 'admin' %}
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link effect-shine" style="color: azure;" href="{% url 'producto' %}">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link effect-shine" style="color: azure;" href="{% url 'crear' %}">Crear Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link effect-shine" style="color: azure;" href="{% url 'nosotros' %}">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link effect-shine" style="color: azure;" href="{% url 'Api' %}">Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link effect-shine disabled" style="color: azure;" href="#">Bienvenido de vuelta {{ user.username }}</a>
+        </li>
+        
+      </ul>
+        {% elif user.is_authenticated %}
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link effect-shine" style="color: azure;" href="{% url 'producto' %}">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link effect-shine" style="color: azure;" href="{% url 'nosotros' %}">Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link effect-shine disabled" style="color: azure;" href="#">Bienvenid@ {{ user.username }}</a>
+          </li>
+        </ul>
+        {% else %}
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link effect-shine" style="color: azure;" href="{% url 'nosotros' %}">Nosotros</a>
+        </li>
+      </ul>
+      {% endif %}
+      <div>
+        {% if user.is_authenticated %}
+        <img src="{% static 'img/usericon.png' %}" class="img-fluid " width="40px">
+        <a href="{% url 'logout' %}" class=" effect-shine">Cerrar Sesión </a>
+        
+        {% else %}
+        <img src="{% static 'img/usericon.png' %}" class="img-fluid " width="40px">
+        <a href="{% url 'login' %}" class="effect-shine">Iniciar Sesión </a>
+        
+
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  <br><br>
+
+
+
+
+
+
+
+  {% block content %}
+
+  {% endblock %}
+  <br><br><br><br>
+<!-- Footer -->
+<footer >
+    <div class="container-fluid  ">
+      <div class="row box" style="background-color: rgb(33,36,41);">
+        <div class="col-lg-12">
+          <h1 class=" xd  text-center" style="color: azure;">GreenSeed</h1>
+          <hr style="background-color: white;">
+        </div>
+
+
+        <div class="col-lg-2">
+          <h3>Contactos</h3>
+          <ul>
+            <li>
+              <p>+56 9 37483369</p>
+            </li>
+            <li>
+              <p>GreenSeed98@gmail.com</p>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <h3>Redes Sociales</h3>
+
+          <img src="{% static 'img/insta.png' %}" height="30em">
+          <img src="{% static 'img/face.png' %}" height="30em">
+          <img src="{% static 'img/twiter.png' %}" height="30em">
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+  <!-- Cierre footer-->
+
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <script src="{% static 'js/reloj.js' %}"></script>
+    <script src="{% static 'js/valida.js' %}"></script>
+
+    
+</body>
+</html>

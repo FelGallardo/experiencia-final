@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <link rel="stylesheet" href="{% static 'css/MyStyles.css' %}">
+    
+    <style>
+        label.error {
+            color:red;
+            font-size: 1em;
+            width:300px;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("#formulario").validate({
+                rules: {
+                    idprod: "required",
+                    nombreproduc: "required",
+                    descripcion: "required",
+                    precio: "required"
+                },
+                messages: {
+                    idprod: {
+                        required: 'Ingrese el id del producto',
+                    },
+                    nombreproduc: {
+                        required: 'Ingrese el nombre del producto',
+                    },
+                    descripcion: {
+                        required: 'El producto debe tener descripcion',
+                    },
+                    precio: {
+                        required: 'Debe ingresar un precio ',
+                    }
+                }
+            })
+        });
+    </script>
+
+    <title>Nuevo Producto</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2></h2>
+    </div>
+    <div class="container" style="position:relative; z-index:1;">
+        <div class="row col-12">
+            <div class="container">
+                <div class="row justify-content-center mx-2">
+                    <form action="" id="formulario" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row justify-content-center">
+                            <label for="{{ productoform.field.name }}">
+                                {{ productoform.idprod.label }}
+                            </label>
+                            {{ productoform.idprod }}
+                        </div>
+                        <br>
+                        <div class="row justify-content-center">
+                            <label for="{{ productoform.field.name }}">
+                                {{ productoform.nombreproduc.label }}
+                            </label>
+                            {{ productoform.nombreproduc }}
+                        </div>
+                        <br>
+                        <div class="row justify-content-center">
+                            <label for="{{ productoform.field.name }}">
+                                {{ productoform.descripcion.label }}
+                            </label>
+                            {{ productoform.descripcion }}
+                        </div>
+                        <br>
+                        <div class="row justify-content-center">
+                            <label for="{{ productoform.field.name }}">
+                                {{ productoform.imagen.label }}
+                            </label>
+                            {{ productoform.imagen }}
+                        </div>
+                        <br>
+                        <div class="row justify-content-center">
+                            <label for="{{ productoform.field.name }}">
+                                {{ productoform.precio.label }}
+                            </label>
+                            {{ productoform.precio }}
+                        </div>
+                        <br>
+                        <div class=" row justify-content-center">
+                            <input type="submit" class=" box botmodal" value="Crear Producto"
+                                style="height: 30px; width: 150px;">
+                        </div>
+
+                        <br><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br>
+ 
+</body>
+
+</html>
+{% endblock %}
