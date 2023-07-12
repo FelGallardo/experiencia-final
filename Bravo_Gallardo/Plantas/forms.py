@@ -54,13 +54,14 @@ class RegistroUserForm(UserCreationForm):
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Productos
-        fields = ['idprod','nombreproduc','descripcion','imagen','precio']
+        fields = ['idprod','nombreproduc','descripcion','imagen','precio','stock']
         labels ={
             'idprod':'Id del Producto',
             'nombreproduc' : 'Nombre del Producto',
             'descripcion': 'Descipcion',
             'imagen':'Imagen',
-            'precio':'Precio'
+            'precio':'Precio',
+            'stock':'stock'
         }
         widgets={
             'idprod':forms.NumberInput(
@@ -96,6 +97,13 @@ class ProductoForm(forms.ModelForm):
                 attrs={
                     'placeholder':'Ingrese un precio..',
                     'id':'precio',
+                    'class':'form-control',
+                }
+            ),
+            'stock':forms.NumberInput(
+                attrs={
+                    'placeholer':'Ingrese el stock',
+                    'id':'stock',
                     'class':'form-control',
                 }
             )

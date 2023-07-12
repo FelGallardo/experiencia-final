@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda</title>
+    {% load static %}
+
+    <link rel="icon" href="{% static 'img/pngwing.com.png' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/MyStyles.css' %}">
+    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+    <script src="{% static 'js/valida.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Tienda</h2> <br>
+        <div class="row">
+            <div class="col-8">
+                <div class="row" style="padding: 5px 0;">
+                    <div class="col-12">
+                        <div class="row">
+                            {% for pro in productos  %}
+                            <div class="col-6">
+                                <div class="card text-center">
+                                    {% if pro.imagen %}
+                                        <img src="{{ pro.imagen.url }}" class="card-img-top mx-auto">
+                                    {% else %}
+                                        <img src="{% static 'img/construc.png' %}" class="card-img-top mx-auto">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="font-weight: bold;">Codigo : {{ pro.idprod}}</h5>
+                                        <p class="card-text">
+                                            Descripcion : {{ pro.descripcion }} <br>
+                                            Stock : {{ pro.stock }} <br>
+                                            Precio :$ {{ pro.precio }} <br>
+                                        </p>
+                                        <a href="{% url 'agregar' pro.idprod %}" class=" box botmodal"
+                                        style="height: 30px; width: 150px;">Agregar al carro</a>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                            
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                {% include "carrito.html" %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

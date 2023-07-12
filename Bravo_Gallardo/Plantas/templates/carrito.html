@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    {%  load static %}
+</head>
+<body>
+    <div role="alert">
+        <table class="table table-bordered alert alert-warning">
+            <thead>
+                <tr scope="row" class="text-center"><td colspan="3" style="font-weight: bold; font-size: 18px;"> Carrito</td></tr>
+                <td style="font-size: 15px; font-weight: bold; color: black; text-align: center;">Nombre del producto</td>
+                <td style="font-size: 15px; font-weight: bold; color: black; text-align: center;">Precio</td>
+                <td style="font-size: 15px; font-weight: bold; color: black; text-align: center;">Stock</td>
+
+            </thead>
+            <tbody>
+                {% if request.session.carrito.items %}
+                    {% for key,value in request.session.carrito.items %}
+                        <tr>
+                            <td style="font-size: 13px;">{{ value.nombreproduc}}</td>
+                            <td style="font-size: 13px;">{{ value.precio}}</td>
+                            <td style="font-size: 13px;">{{ value.stock}}
+                                <br>
+                                <a href="{% url 'agregar' value.idprod %}" class="badge btn btn-primary " style="width: 40px; height: 40px; color: black;">+</a>
+                                <a href="{% url 'restar' value.idprod %}" class="badge btn btn-warning " style="width: 40px; height: 40px;">-</a>
+                                <br>
+                        </tr>
+                        <tr>
+                            <th scope="row">Total: </th>
+                            <td colspan="2">$ {{ value.total}}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">
+                        <div class="alert alert-info text-center" style="font-weight: bold;"> Sin Productos</div>
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <hr>
+    </div>
+    <div class="row text-center">
+        <div class="col-6">
+            <a href="{% url 'limpiar' %}" class="btn btn-warning" style="width: 150px;">limpiar</a>
+        </div>
+        <div class="col-6">
+            <a href="{% url 'generarBoleta' %}" class="btn btn-primary" style="width: 150px;">Comprar</a>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -95,6 +95,13 @@
                             {{ productoform.precio }}
                         </div>
                         <br>
+                        <div class="row justify-content-center">
+                            <label for="{{ productoform.field.name }}">
+                                {{ productoform.stock.label }}
+                            </label>
+                            {{ productoform.stock }}
+                        </div>
+                        <br>
                         <div class=" row justify-content-center">
                             <input type="submit" class=" box botmodal" value="Crear Producto"
                                 style="height: 30px; width: 150px;">

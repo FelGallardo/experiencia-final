@@ -52,12 +52,15 @@
                         <p class="card-text cajaP ">
                             {{ pro.descripcion }}
                         </p>
+                        <p>
+                            Stock: {{ pro.stock }}
+                        </p>
                         <h3 class="cajaP">
                             ${{ pro.precio}}.-
                         </h3>
                         {% if user.is_authenticated and user.username == 'admin' %}
-                        <button class="btn btn-one"
-                            style="color: black; border-radius: 100px; text-align: center;">Agregar al Carrito</button>
+                        <a href="{% url 'agregar' pro.idprod %}" class="btn btn-one"
+                            style="color: black; border-radius: 100px; text-align: center;">Agregar al Carrito</a>
                         <a href="{% url 'eliminar' pro.idprod %}" class="btn btn-one"
                             style="color: black; border-radius: 100px; text-align: center;">Eliminar</a>
                         <a href="{% url  'modificar' pro.idprod %}" class="btn btn-one"
@@ -66,7 +69,7 @@
                         <button class="btn btn-one" style="color: black; border-radius: 100px;">Agregar al
                             Carrito</button>
                         {% endif %}
-
+                        
                     </div>
                 </div>
                 <br>
